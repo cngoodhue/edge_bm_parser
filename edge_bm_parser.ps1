@@ -1,18 +1,10 @@
-﻿#
-# Create a new file called "Bookmarks.html" and paste the code below into it.
-# 
-# <!DOCTYPE NETSCAPE-Bookmark-file-1>
-# <!-- This is an automatically generated file.
-#      It will be read and overwritten.
-#      DO NOT EDIT! -->
-# <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-# <TITLE>Bookmarks</TITLE>
-# <H1>Bookmarks</H1>
-# <DL><p>
-#
+New-Item -ItemType File -Path $env:USERPROFILE -Name "Bookmarks.html"
 
-$ogFilePath = Read-Host = "Enter the *FULL* path of the original Edge bookmarks file to be converted"
-$bmFilePath = Read-Host = "Enter the *FULL* path of the Bookmarks.html file you created"
+$initialCode = "<!DOCTYPE NETSCAPE-Bookmark-file-1>`n<!-- This is an automatically generated file.`n`tIt will be read and overwritten.`n`tDO NOT EDIT! -->`n<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>`n<TITLE>Bookmarks</TITLE>`n<H1>Bookmarks</H1>`n<DL><p>"
+$initialCode | Out-File -FilePath "$env:USERPROFILE\Bookmarks.html" -Append -Encoding ascii
+
+$ogFilePath = Read-Host "Enter the *FULL* path of the original Edge bookmarks file to be converted"
+$bmFilePath = "$env:USERPROFILE\Bookmarks.html"
 
 $file = Get-Content $ogFilePath
 $json = $file | ConvertFrom-Json
